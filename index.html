@@ -30,26 +30,38 @@
 <body>
 
   <div class="container">
-    <div id="carousel">
-      <!-- Prev button -->
-      <i id="prev-button" class="bi bi-arrow-left-circle-fill" role="button"></i>
+    <div id="root">
+      <div id="carousel">
+        <!-- Prev button -->
+        <i id="prev-button" class="bi bi-arrow-left-circle-fill" role="button" @click="setCurrentIndex('prev')"></i>
 
-      <!-- Gallery -->
-      <div class="gallery">
+        <!-- Gallery -->
+        <div class="gallery">
+          <figure v-for="(place, i) in places" v-show="currentIndex === i" @mouseenter="stopAutoplay"
+            @mouseleave="startAutoplay">
+            <figcaption>
+              <h2>{{place.name}}</h2>
+              <h3>{{place.description}}</h3>
+            </figcaption>
+            <img :src="`img/${place.image}`" :alt="place.name">
+          </figure>
+        </div>
 
+        <!-- next button -->
+        <i id="next-button" class="bi bi-arrow-right-circle-fill" role="button" @click="setCurrentIndex('next')"></i>
       </div>
 
-      <!-- next button -->
-      <i id="next-button" class="bi bi-arrow-right-circle-fill" role="button"></i>
-    </div>
+      <!-- Thumbnails -->
+      <div id="thumbnails">
+        <img v-for="(place, i) in places" :src="`img/${place.image}`" :alt="place.name"
+          :class="{active: i === currentIndex}" @click="setCurrentIndex(i)">
+      </div>
 
-    <!-- Thumbnails -->
-    <div id="thumbnails">
-
-    </div>
-
-    <div class="autoplay-controls">
-      <button id="autoplay-button">STOP AUTOPLAY</button>
+      <!-- next button 
+      <div class="autoplay-controls">
+        <button id="autoplay-button">STOP AUTOPLAY</button>
+      </div>
+      -->
     </div>
   </div>
 </body>
