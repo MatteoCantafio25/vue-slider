@@ -1,5 +1,5 @@
 // Prepariamo array con gli url delle immagini
-const destinations = [
+const places = [
   {
     image: '01.jpg',
     name: 'Svezia',
